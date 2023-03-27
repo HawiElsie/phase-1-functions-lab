@@ -11,26 +11,45 @@ function draw() {
   
   function distanceFromHqInBlocks(pickupLocation) {
     const hqLocation = 42; // Set Scuber headquarters location to 42nd Street
-    const blockLength = 264; // Set block length to approximately 1/10th of a mile in feet
-    
-    const distanceInFeet = Math.abs(pickupLocation - hqLocation) * blockLength; // Calculate distance in feet
-    
-    const distanceInBlocks = Math.ceil(distanceInFeet / blockLength); // Convert distance to blocks
-    
+   
+    var distanceInBlocks = Math.abs(pickupLocation - hqLocation) ; // Calculate distance in feet
+   
     return distanceInBlocks;
+  }
+  function distanceFromHqInFeet(pickupLocation) {
+    var dfromhqblk=distanceFromHqInBlocks(pickupLocation);
+    var dstFeet=dfromhqblk * 264;
+    return dstFeet;
   }
 
   function distanceTravelledInFeet(startBlock, endBlock) {
     const blockLength = 264; // Set block length to 264 feet
     
-    const distanceInBlocks = Math.abs(endBlock - startBlock); // Calculate the distance in blocks
-    const distanceInFeet = distanceInBlocks * blockLength; // Convert blocks to feet
+    var distanceInBlocks = Math.abs(endBlock - startBlock); // Calculate the distance in blocks
+    var distanceInFeet = distanceInBlocks * blockLength; // Convert blocks to feet
     
     return distanceInFeet;
   }
-  
-  const distance = distanceTravelledInFeet(34, 38); // Should return 1056
-  console.log(distance); // Output should be 1056
 
+  function calculatesFarePrice(start, destination) {
+    const freeRide = 400;
+    var fare;
+    var dstanceTravelled=distanceTravelledInFeet(start, destination);
+    if (dstanceTravelled > freeRide){
+      var excessdst = dstanceTravelled-freeRide;
+      if (excessdst < 2000|| excessdst == 2000){
+         var f= 2 * excessdst;
+         fare = f + " cents fare"
+      } else if ( excessdst < 2500 || excessdst == 2500){
+         
+         fare = " 25 dollars fare"
+      }else{
+         fare = "cannot travel that far"
+      }
+    } else{
+      fare = "free Ride";
+    }
+    //returns the fare for the customer
+  }
   
   
